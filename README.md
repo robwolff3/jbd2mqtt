@@ -4,7 +4,7 @@
 
 ## What is this?
 
-A containerized version of NodeJBD / bms-tools for easy monitoring of your JBD BMS with MQTT on Docker. My use case is for integration with Home Assistant but with MQTT your imagination is the limit. Currently only capable of *read only* access of the BMS.
+A containerized version of NodeJBD / bms-tools for easy monitoring of your JBD BMS with MQTT on Docker. My use case is for integration with Home Assistant but with MQTT your imagination is the limit. Currently only supports a serial UART connection (tested via USB) and only capable of *read only* access of the BMS.
 
 [mickwheelz](https://github.com/mickwheelz) and [MrSurly](https://gitlab.com/MrSurly) did all the work and build the underlying tools. If you like this project go check out and star their repositories below:
 
@@ -17,6 +17,8 @@ A containerized version of NodeJBD / bms-tools for easy monitoring of your JBD B
 
 ## Connecting to your BMS
 
+### Compatibility
+
 In theory this container should work with any JBD BMS however these are the confirmed working models by mickwheelz and I:
 
 |BMS Model|Interface|Notes|Status|
@@ -24,11 +26,18 @@ In theory this container should work with any JBD BMS however these are the conf
 |JBD SP04S028A|UART| 150A 4s LiFePO4 BMS|✅|
 |JBD SP04S28A4S|UART|100A 4s LiFePO4 BMS|✅|
 
+### Connection
+
+This project currently only supports a serial UART connection to the BMS. It has only been tested tested through a USB to UART serial adapter.
+
+##### USB UART Serial Connection
+
 The JBD BMS has a 5v TTL serial connection UART port for communication. Connect TX, RX and GND and you should be good to go. I used a CP2102 based USB adapter from amazon and made a custom cable. I think ready made adapters exist over at Overkill Solar, Current Connected or AliExpress.
 
-**NOTE:** The UART port has 4 pins, GND, TX, RX and VCC. I have seen reports of VCC putting out ~10v so I would **NOT** connect anything to VCC. It is not needed for the CP2102 based USB adapter or any other adapter.
+##### Important Connection Notes:
 
-**NOTE**: Seeing how there is only one UART port on the BMS I don't think the USB adapter and bluetooth adapter can be used at the same time.
+- The UART port has 4 pins, GND, TX, RX and VCC. I have seen reports of VCC putting out ~10v so I would **NOT** connect anything to VCC. It is not needed for the CP2102 based USB adapter or any other adapter.
+- Seeing how there is only one UART port on the BMS I don't think the USB adapter and bluetooth adapter can be used at the same time.
 
 
 
